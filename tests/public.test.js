@@ -40,9 +40,10 @@ test("grouped project navigation keeps MusicBox first and both new games at the 
   const games = html.slice(html.indexOf('id="site-projects-games"'), html.indexOf('id="site-projects-edu"'));
   const musicBox = games.indexOf("/musicbox/");
   const ticTacToe = games.indexOf("/tictactoe/");
-  const lifeLab = games.indexOf("/gameoflife/");
-  assert.ok(musicBox >= 0 && ticTacToe > musicBox && lifeLab > ticTacToe);
+  const gameOfLife = games.indexOf("/gameoflife/");
+  assert.ok(musicBox >= 0 && ticTacToe > musicBox && gameOfLife > ticTacToe);
   assert.match(games, /href="\/tictactoe\/" aria-current="page"/);
+  assert.match(games, />Conway’s Game of Life</);
 });
 
 test("Apache child configuration supplies an index and disables listings", async () => {
