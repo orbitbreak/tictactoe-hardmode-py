@@ -132,7 +132,7 @@ function playHumanMove(index) {
 
 function scheduleAiMove() {
   if (!state.roundActive || state.turn !== state.aiMark) return;
-  renderBoard();
+  renderBoard(state.lastMove);
   announce(`${DIFFICULTY_NAMES[state.difficulty]} mode is considering the grid…`, "gold");
 
   const token = state.roundToken;
