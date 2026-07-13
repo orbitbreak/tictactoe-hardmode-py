@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tic-Tac-Toe grid with X and O">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#26345e" />
+      <stop offset="1" stop-color="#11172a" />
+    </linearGradient>
+    <linearGradient id="x" x1="11" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffd36b" />
+      <stop offset="1" stop-color="#ff8a6a" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)" />
+  <path d="M23 7v50M41 7v50M7 23h50M7 41h50" fill="none" stroke="#91a1c7" stroke-opacity=".58" stroke-width="2" />
+  <path d="m10.5 10.5 9 9m0-9-9 9M44.5 44.5l9 9m0-9-9 9" fill="none" stroke="url(#x)" stroke-linecap="round" stroke-width="4" />
+  <circle cx="32" cy="32" r="6.5" fill="none" stroke="#73e0c0" stroke-width="4" />
+</svg>

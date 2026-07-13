@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Play accessible Tic-Tac-Toe against easy, medium, or mathematically perfect hard-mode opponents, then inspect the move that decided the game."
+    />
+    <meta name="theme-color" content="#11172a" />
+    <meta property="og:title" content="Hard Mode Tic-Tac-Toe" />
+    <meta
+      property="og:description"
+      content="You cannot beat hard mode. Can you survive it?"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.jasonsher.com/tictactoe/" />
+    <link rel="canonical" href="https://www.jasonsher.com/tictactoe/" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="site-nav.css?v=20260713-1" />
+    <link rel="stylesheet" href="styles.css?v=20260713-1" />
+    <script defer src="js/site-nav.js?v=20260713-1"></script>
+    <script type="module" src="js/app.js?v=20260713-1"></script>
+    <title>Hard Mode Tic-Tac-Toe</title>
+    <!-- Psst: the original minimalist Python/Tkinter ancestor survives byte-for-byte in legacy/original/. -->
+  </head>
+  <body>
+    <a class="skip-link" href="#game">Skip to the game</a>
+
+    <details class="site-projects" data-site-projects>
+      <summary class="site-projects__summary">
+        <svg class="site-projects__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+        <span>Projects</span>
+      </summary>
+      <div class="site-projects__panel">
+        <nav aria-label="Site projects">
+          <ul class="site-projects__list">
+            <li class="site-projects__home">
+              <a class="site-projects__link" href="/">
+                <span class="site-projects__name">Home/Ripples</span>
+              </a>
+            </li>
+            <li class="site-projects__group">
+              <span class="site-projects__section-title" id="site-projects-graphics">graphics-toys</span>
+              <ul class="site-projects__group-list" aria-labelledby="site-projects-graphics">
+                <li><a class="site-projects__link" href="/gravitypoints"><span class="site-projects__name">Gravity Points</span></a></li>
+                <li><a class="site-projects__link" href="/particlepusher"><span class="site-projects__name">Particle Pusher</span></a></li>
+                <li><a class="site-projects__link" href="/meshmorpher"><span class="site-projects__name">Mesh Morpher</span></a></li>
+              </ul>
+            </li>
+            <li class="site-projects__group">
+              <span class="site-projects__section-title" id="site-projects-games">games</span>
+              <ul class="site-projects__group-list" aria-labelledby="site-projects-games">
+                <li><a class="site-projects__link" href="/musicbox/"><span class="site-projects__name">MusicBox</span></a></li>
+                <li><a class="site-projects__link" href="/platformjumper"><span class="site-projects__name">Platform Jumper</span></a></li>
+                <li><a class="site-projects__link" href="/snakeautorandom"><span class="site-projects__name">Snake Autorandom</span></a></li>
+                <li><a class="site-projects__link" href="/tictactoe/" aria-current="page"><span class="site-projects__name">Hard Mode Tic-Tac-Toe</span></a></li>
+                <li><a class="site-projects__link" href="/gameoflife/"><span class="site-projects__name">Conway’s Life Lab</span></a></li>
+              </ul>
+            </li>
+            <li class="site-projects__group">
+              <span class="site-projects__section-title" id="site-projects-edu">edu101</span>
+              <ul class="site-projects__group-list" aria-labelledby="site-projects-edu">
+                <li>
+                  <a class="site-projects__link" href="/LLM101/">
+                    <span class="site-projects__name">LLM101</span>
+                    <span class="site-projects__description">Interactive textbook on AI/ML for LLM development</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </details>
+
+    <main class="page-shell" id="game">
+      <header class="hero">
+        <p class="eyebrow">A tiny game without mercy</p>
+        <h1>Hard Mode <span>Tic-Tac-Toe</span></h1>
+        <p class="hero__lede">
+          You cannot beat perfect play. Hold it to a draw, then inspect exactly where every other future disappeared.
+        </p>
+        <div class="hero__facts" aria-label="Game features">
+          <span>Silent</span>
+          <span>Client-side</span>
+          <span>Keyboard friendly</span>
+        </div>
+      </header>
+
+      <div class="game-layout">
+        <section class="arena card" aria-labelledby="arena-title">
+          <div class="arena__heading">
+            <div>
+              <p class="section-kicker">Current duel</p>
+              <h2 id="arena-title">Survive the grid</h2>
+            </div>
+            <span class="difficulty-badge" id="difficulty-badge">Hard mode</span>
+          </div>
+
+          <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+          <div class="board-wrap">
+            <div class="board" id="board" role="grid" aria-label="Tic-Tac-Toe board" aria-describedby="board-help">
+              <div class="board__row" role="row">
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="0" aria-label="Top left, empty"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="1" aria-label="Top middle, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="2" aria-label="Top right, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+              </div>
+              <div class="board__row" role="row">
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="3" aria-label="Middle left, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="4" aria-label="Center, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="5" aria-label="Middle right, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+              </div>
+              <div class="board__row" role="row">
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="6" aria-label="Bottom left, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="7" aria-label="Bottom middle, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+                <div class="board__gridcell" role="gridcell"><button class="cell" type="button" data-index="8" aria-label="Bottom right, empty" tabindex="-1"><span aria-hidden="true"></span></button></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="board-help" id="board-help">
+            Use arrow keys to move around the board, Enter or Space to play, or press 1–9 for top-left through bottom-right.
+          </p>
+
+          <div class="arena__actions">
+            <button class="button button--primary" type="button" id="rematch">New round</button>
+            <button class="button button--defeat" type="button" id="accept-defeat">Accept Defeat</button>
+          </div>
+        </section>
+
+        <aside class="control-stack" aria-label="Game controls and record">
+          <section class="card control-card" aria-labelledby="difficulty-title">
+            <p class="section-kicker">Opponent</p>
+            <h2 id="difficulty-title">Choose the pressure</h2>
+            <fieldset class="choice-group" id="difficulty-controls">
+              <legend class="visually-hidden">Difficulty</legend>
+              <label class="choice">
+                <input type="radio" name="difficulty" value="easy" />
+                <span><strong>Easy</strong><small>Unapologetically random</small></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="difficulty" value="medium" />
+                <span><strong>Medium</strong><small>Sees immediate danger</small></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="difficulty" value="hard" checked />
+                <span><strong>Hard</strong><small>Perfect, exhaustively verified</small></span>
+              </label>
+            </fieldset>
+          </section>
+
+          <section class="card control-card" aria-labelledby="starter-title">
+            <p class="section-kicker">Opening move</p>
+            <h2 id="starter-title">Who takes X?</h2>
+            <fieldset class="choice-group choice-group--compact" id="starter-controls">
+              <legend class="visually-hidden">Starting player</legend>
+              <label class="choice">
+                <input type="radio" name="starter" value="human" checked />
+                <span><strong>You start</strong><small>You are X</small></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="starter" value="computer" />
+                <span><strong>Machine starts</strong><small>You are O</small></span>
+              </label>
+            </fieldset>
+            <p class="fine-print">X always moves first. Changing this setting begins a fresh round.</p>
+          </section>
+
+          <section class="card record-card" aria-labelledby="record-title">
+            <div class="record-card__heading">
+              <div>
+                <p class="section-kicker">Local record</p>
+                <h2 id="record-title">Hard mode</h2>
+              </div>
+              <button class="text-button" type="button" id="reset-record">Reset</button>
+            </div>
+            <dl class="record">
+              <div><dt>Wins</dt><dd id="stat-wins">0</dd></div>
+              <div><dt>Draws</dt><dd id="stat-draws">0</dd></div>
+              <div><dt>Losses</dt><dd id="stat-losses">0</dd></div>
+            </dl>
+            <p class="fine-print">Saved only in this browser, separately for each difficulty.</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="report card" id="report" aria-labelledby="report-title" hidden>
+        <div class="report__heading">
+          <div>
+            <p class="section-kicker">Post-game analysis</p>
+            <h2 id="report-title">No Mercy Report</h2>
+          </div>
+          <span class="report__stamp" aria-hidden="true">VERDICT</span>
+        </div>
+        <p class="report__summary" id="report-summary"></p>
+        <div id="report-detail"></div>
+        <div class="report__actions">
+          <button class="button button--primary" type="button" id="rewind" hidden>Rewind before the slip</button>
+        </div>
+      </section>
+
+      <section class="guide" aria-labelledby="guide-title">
+        <div class="guide__heading">
+          <p class="section-kicker">Field notes</p>
+          <h2 id="guide-title">How to survive</h2>
+        </div>
+        <div class="guide__grid">
+          <article class="guide-card">
+            <span class="guide-card__number">01</span>
+            <h3>Make the draw the prize</h3>
+            <p>Hard mode evaluates every possible future. A draw means you matched perfect play all the way down.</p>
+          </article>
+          <article class="guide-card">
+            <span class="guide-card__number">02</span>
+            <h3>Study the first crack</h3>
+            <p>The report finds the first human move that turned a drawable or winning position into a forced loss.</p>
+          </article>
+          <article class="guide-card">
+            <span class="guide-card__number">03</span>
+            <h3>Branch the timeline</h3>
+            <p>Rewind to that position or try any alternate move. Your record rolls back until the branch is finished.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Pure HTML, CSS, and JavaScript. No framework, account, tracking, sound, or server game state.</p>
+      </footer>
+    </main>
+  </body>
+</html>
