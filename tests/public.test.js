@@ -35,22 +35,29 @@ test("page is self-contained, accessible at the structural level, and has the le
   assert.doesNotMatch(html, /service-worker|manifest\.webmanifest/i);
 });
 
-test("project navigation features MusicBox separately with exact section titles", async () => {
+test("project navigation features MusicBox and Doppler Radar in exact sections", async () => {
   const html = await readFile(path.join(publicRoot, "index.html"), "utf8");
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
   const featuredStart = html.indexOf('id="site-projects-featured"');
+  const toolsStart = html.indexOf('id="site-projects-tools"');
   const graphicsStart = html.indexOf('id="site-projects-graphics"');
   const gamesStart = html.indexOf('id="site-projects-games"');
   const eduStart = html.indexOf('id="site-projects-edu"');
-  assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < eduStart);
-  const featured = html.slice(featuredStart, graphicsStart);
+  assert.ok(home >= 0 && home < featuredStart && featuredStart < toolsStart && toolsStart < graphicsStart && graphicsStart < gamesStart && gamesStart < eduStart);
+  const featured = html.slice(featuredStart, toolsStart);
+  const tools = html.slice(toolsStart, graphicsStart);
   const games = html.slice(gamesStart, eduStart);
   assert.match(html, /site-nav\.css\?v=20260717-nav3/);
   assert.match(html, /js\/site-nav\.js\?v=20260713-1/);
   assert.match(featured, />Featured<\/span>/);
   assert.match(featured, /href="\/musicbox\/"/);
   assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 1);
+  assert.match(tools, />Tools<\/span>/);
+  assert.match(tools, /href="\/radar\/"/);
+  assert.match(tools, />Doppler Radar<\/span>/);
+  assert.match(tools, />Interactive recent weather radar<\/span>/);
+  assert.equal((tools.match(/class="site-projects__link"/g) ?? []).length, 1);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
   assert.doesNotMatch(games, /MusicBox/);
