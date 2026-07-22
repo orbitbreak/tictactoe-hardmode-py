@@ -35,29 +35,29 @@ test("page is self-contained, accessible at the structural level, and has the le
   assert.doesNotMatch(html, /service-worker|manifest\.webmanifest/i);
 });
 
-test("project navigation features MusicBox and Doppler Radar in exact sections", async () => {
+test("project navigation features MusicBox and Weather Radar in exact sections", async () => {
   const html = await readFile(path.join(publicRoot, "index.html"), "utf8");
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
   const featuredStart = html.indexOf('id="site-projects-featured"');
   const graphicsStart = html.indexOf('id="site-projects-graphics"');
   const gamesStart = html.indexOf('id="site-projects-games"');
-  const eduStart = html.indexOf('id="site-projects-edu"');
-  assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < eduStart);
+  const learnStart = html.indexOf('id="site-projects-learn"');
+  assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < learnStart);
   const featured = html.slice(featuredStart, graphicsStart);
-  const games = html.slice(gamesStart, eduStart);
-  assert.match(html, /site-nav\.css\?v=20260721-nav4/);
+  const games = html.slice(gamesStart, learnStart);
+  assert.match(html, /site-nav\.css\?v=20260722-nav5/);
   assert.match(html, /js\/site-nav\.js\?v=20260713-1/);
   assert.match(featured, />Featured<\/span>/);
   assert.match(featured, /href="\/musicbox\/"/);
-  assert.match(featured, /href="\/radar\/"/);
+  assert.match(featured, /href="\/radar\/"[^>]*>[\s\S]*?>Weather Radar<\/span>/);
   assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 2);
   assert.doesNotMatch(html, /site-projects-tools|site-projects__description|>Tools<\/span>/);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
   assert.doesNotMatch(games, /MusicBox/);
-  assert.match(html.slice(eduStart), />Edu-101<\/span>/);
-  assert.match(html.slice(eduStart), /href="\/LLM101\/"[\s\S]*?>LLM101<\/span>/);
+  assert.match(html.slice(learnStart), />Learn<\/span>/);
+  assert.match(html.slice(learnStart), /href="\/LLM101\/"[\s\S]*?>LLMs 101 Textbook<\/span>/);
   const platform = games.indexOf("/platformjumper");
   const snake = games.indexOf("/snakeautorandom");
   const ticTacToe = games.indexOf("/tictactoe/");
@@ -66,7 +66,9 @@ test("project navigation features MusicBox and Doppler Radar in exact sections",
   assert.match(games, /href="\/tictactoe\/" aria-current="page"/);
   assert.match(games, />Conway’s Game of Life</);
   assert.doesNotMatch(css, /text-transform:\s*uppercase/);
+  assert.match(css, /\.site-projects__section-title[\s\S]*?background: #eef2f6/);
   assert.match(css, /#site-projects-featured[\s\S]*?background: #fff0a8/);
+  assert.match(css, /@media \(forced-colors: active\)[\s\S]*?\.site-projects__section-title[\s\S]*?background: Canvas/);
 });
 
 test("Apache child configuration supplies an index and disables listings", async () => {
