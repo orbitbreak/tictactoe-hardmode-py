@@ -40,28 +40,24 @@ test("project navigation features MusicBox and Doppler Radar in exact sections",
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
   const featuredStart = html.indexOf('id="site-projects-featured"');
-  const toolsStart = html.indexOf('id="site-projects-tools"');
   const graphicsStart = html.indexOf('id="site-projects-graphics"');
   const gamesStart = html.indexOf('id="site-projects-games"');
   const eduStart = html.indexOf('id="site-projects-edu"');
-  assert.ok(home >= 0 && home < featuredStart && featuredStart < toolsStart && toolsStart < graphicsStart && graphicsStart < gamesStart && gamesStart < eduStart);
-  const featured = html.slice(featuredStart, toolsStart);
-  const tools = html.slice(toolsStart, graphicsStart);
+  assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < eduStart);
+  const featured = html.slice(featuredStart, graphicsStart);
   const games = html.slice(gamesStart, eduStart);
-  assert.match(html, /site-nav\.css\?v=20260717-nav3/);
+  assert.match(html, /site-nav\.css\?v=20260721-nav4/);
   assert.match(html, /js\/site-nav\.js\?v=20260713-1/);
   assert.match(featured, />Featured<\/span>/);
   assert.match(featured, /href="\/musicbox\/"/);
-  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 1);
-  assert.match(tools, />Tools<\/span>/);
-  assert.match(tools, /href="\/radar\/"/);
-  assert.match(tools, />Doppler Radar<\/span>/);
-  assert.match(tools, />Interactive recent weather radar<\/span>/);
-  assert.equal((tools.match(/class="site-projects__link"/g) ?? []).length, 1);
+  assert.match(featured, /href="\/radar\/"/);
+  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 2);
+  assert.doesNotMatch(html, /site-projects-tools|site-projects__description|>Tools<\/span>/);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
   assert.doesNotMatch(games, /MusicBox/);
   assert.match(html.slice(eduStart), />Edu-101<\/span>/);
+  assert.match(html.slice(eduStart), /href="\/LLM101\/"[\s\S]*?>LLM101<\/span>/);
   const platform = games.indexOf("/platformjumper");
   const snake = games.indexOf("/snakeautorandom");
   const ticTacToe = games.indexOf("/tictactoe/");
@@ -70,6 +66,7 @@ test("project navigation features MusicBox and Doppler Radar in exact sections",
   assert.match(games, /href="\/tictactoe\/" aria-current="page"/);
   assert.match(games, />Conway’s Game of Life</);
   assert.doesNotMatch(css, /text-transform:\s*uppercase/);
+  assert.match(css, /#site-projects-featured[\s\S]*?background: #fff0a8/);
 });
 
 test("Apache child configuration supplies an index and disables listings", async () => {
