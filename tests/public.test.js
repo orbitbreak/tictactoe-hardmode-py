@@ -35,7 +35,7 @@ test("page is self-contained, accessible at the structural level, and has the le
   assert.doesNotMatch(html, /service-worker|manifest\.webmanifest/i);
 });
 
-test("project navigation features MusicBox and Weather Radar in exact sections", async () => {
+test("project navigation features MusicBox and StormSight with descriptions in exact sections", async () => {
   const html = await readFile(path.join(publicRoot, "index.html"), "utf8");
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
@@ -46,13 +46,14 @@ test("project navigation features MusicBox and Weather Radar in exact sections",
   assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < learnStart);
   const featured = html.slice(featuredStart, graphicsStart);
   const games = html.slice(gamesStart, learnStart);
-  assert.match(html, /site-nav\.css\?v=20260722-nav5/);
+  assert.match(html, /site-nav\.css\?v=20260728-nav6/);
   assert.match(html, /js\/site-nav\.js\?v=20260713-1/);
   assert.match(featured, />Featured<\/span>/);
-  assert.match(featured, /href="\/musicbox\/"/);
-  assert.match(featured, /href="\/radar\/"[^>]*>[\s\S]*?>Weather Radar<\/span>/);
+  assert.match(featured, /href="\/musicbox\/"[^>]*><span class="site-projects__name">MusicBox<\/span><span class="site-projects__description">Multi-track Step Sequencer Instrument<\/span>/);
+  assert.match(featured, /href="\/radar\/"[^>]*><span class="site-projects__name">StormSight<\/span><span class="site-projects__description">Doppler Radar Map<\/span>/);
   assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 2);
-  assert.doesNotMatch(html, /site-projects-tools|site-projects__description|>Tools<\/span>/);
+  assert.equal((featured.match(/site-projects__description/g) ?? []).length, 2);
+  assert.doesNotMatch(html, /site-projects-tools|>Tools<\/span>/);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
   assert.doesNotMatch(games, /MusicBox/);
@@ -68,6 +69,7 @@ test("project navigation features MusicBox and Weather Radar in exact sections",
   assert.doesNotMatch(css, /text-transform:\s*uppercase/);
   assert.match(css, /\.site-projects__section-title[\s\S]*?background: #eef2f6/);
   assert.match(css, /#site-projects-featured[\s\S]*?background: #fff0a8/);
+  assert.match(css, /\.site-projects__description[\s\S]*?font-size: 0\.72rem/);
   assert.match(css, /@media \(forced-colors: active\)[\s\S]*?\.site-projects__section-title[\s\S]*?background: Canvas/);
 });
 
