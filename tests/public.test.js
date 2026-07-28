@@ -35,7 +35,7 @@ test("page is self-contained, accessible at the structural level, and has the le
   assert.doesNotMatch(html, /service-worker|manifest\.webmanifest/i);
 });
 
-test("project navigation features MusicBox and StormSight with descriptions in exact sections", async () => {
+test("project navigation features all four featured apps with descriptions in exact order", async () => {
   const html = await readFile(path.join(publicRoot, "index.html"), "utf8");
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
@@ -46,13 +46,20 @@ test("project navigation features MusicBox and StormSight with descriptions in e
   assert.ok(home >= 0 && home < featuredStart && featuredStart < graphicsStart && graphicsStart < gamesStart && gamesStart < learnStart);
   const featured = html.slice(featuredStart, graphicsStart);
   const games = html.slice(gamesStart, learnStart);
-  assert.match(html, /site-nav\.css\?v=20260728-nav6/);
+  assert.match(html, /site-nav\.css\?v=20260728-nav7/);
   assert.match(html, /js\/site-nav\.js\?v=20260713-1/);
   assert.match(featured, />Featured<\/span>/);
+  const bandBot = featured.indexOf('href="/bandbot/"');
+  const tickerTags = featured.indexOf('href="/tickertags/"');
+  const musicBox = featured.indexOf('href="/musicbox/"');
+  const stormSight = featured.indexOf('href="/radar/"');
+  assert.ok(bandBot >= 0 && bandBot < tickerTags && tickerTags < musicBox && musicBox < stormSight);
+  assert.match(featured, /href="\/bandbot\/"[^>]*><span class="site-projects__name">BandBot<\/span><span class="site-projects__description">Browser-side AI Music Composer<\/span>/);
+  assert.match(featured, /href="\/tickertags\/"[^>]*><span class="site-projects__name">TickerTags<\/span><span class="site-projects__description">Multi-ticker Stock Chart Viewer<\/span>/);
   assert.match(featured, /href="\/musicbox\/"[^>]*><span class="site-projects__name">MusicBox<\/span><span class="site-projects__description">Multi-track Step Sequencer Instrument<\/span>/);
   assert.match(featured, /href="\/radar\/"[^>]*><span class="site-projects__name">StormSight<\/span><span class="site-projects__description">Doppler Radar Map<\/span>/);
-  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 2);
-  assert.equal((featured.match(/site-projects__description/g) ?? []).length, 2);
+  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 4);
+  assert.equal((featured.match(/site-projects__description/g) ?? []).length, 4);
   assert.doesNotMatch(html, /site-projects-tools|>Tools<\/span>/);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
