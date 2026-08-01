@@ -53,11 +53,11 @@ test("project navigation features all four featured apps with descriptions in ex
   const tickerTags = featured.indexOf('href="/tickertags/"');
   const musicBox = featured.indexOf('href="/musicbox/"');
   const stormSight = featured.indexOf('href="/radar/"');
-  assert.ok(bandBot >= 0 && bandBot < tickerTags && tickerTags < musicBox && musicBox < stormSight);
-  assert.match(featured, /href="\/bandbot\/"[^>]*><span class="site-projects__name">BandBot<\/span><span class="site-projects__description">Browser-side AI Music Composer<\/span>/);
-  assert.match(featured, /href="\/tickertags\/"[^>]*><span class="site-projects__name">TickerTags<\/span><span class="site-projects__description">Multi-ticker Stock Chart Viewer<\/span>/);
-  assert.match(featured, /href="\/musicbox\/"[^>]*><span class="site-projects__name">MusicBox<\/span><span class="site-projects__description">Multi-track Step Sequencer Instrument<\/span>/);
+  assert.ok(musicBox >= 0 && musicBox < stormSight && stormSight < bandBot && bandBot < tickerTags);
+  assert.match(featured, /href="\/musicbox\/"[^>]*><span class="site-projects__name">MusicBox<\/span><span class="site-projects__description">Paint the grid\. Play the groove\.<\/span>/);
   assert.match(featured, /href="\/radar\/"[^>]*><span class="site-projects__name">StormSight<\/span><span class="site-projects__description">Doppler Radar Map<\/span>/);
+  assert.match(featured, /href="\/bandbot\/"[^>]*><span class="site-projects__name">BandBot<\/span><span class="site-projects__description">Music Composition Studio<\/span>/);
+  assert.match(featured, /href="\/tickertags\/"[^>]*><span class="site-projects__name">TickerTags<\/span><span class="site-projects__description">Multi-ticker Stock Chart Viewer<\/span>/);
   assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 4);
   assert.equal((featured.match(/site-projects__description/g) ?? []).length, 4);
   assert.doesNotMatch(html, /site-projects-tools|>Tools<\/span>/);
@@ -66,6 +66,7 @@ test("project navigation features all four featured apps with descriptions in ex
   assert.doesNotMatch(games, /MusicBox/);
   assert.match(html.slice(learnStart), />Learn<\/span>/);
   assert.match(html.slice(learnStart), /href="\/LLM101\/"[\s\S]*?>LLMs 101 Textbook<\/span>/);
+  assert.match(html.slice(learnStart), /href="\/Blockchain101-EVM\/"[\s\S]*?>Blockchain 101: EVM<\/span>/);
   const platform = games.indexOf("/platformjumper");
   const snake = games.indexOf("/snakeautorandom");
   const ticTacToe = games.indexOf("/tictactoe/");
