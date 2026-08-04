@@ -35,7 +35,7 @@ test("page is self-contained, accessible at the structural level, and has the le
   assert.doesNotMatch(html, /service-worker|manifest\.webmanifest/i);
 });
 
-test("project navigation features all four featured apps with descriptions in exact order", async () => {
+test("project navigation features all seven featured apps with descriptions in exact order", async () => {
   const html = await readFile(path.join(publicRoot, "index.html"), "utf8");
   const css = await readFile(path.join(publicRoot, "site-nav.css"), "utf8");
   const home = html.indexOf(">Home (Ripples)<");
@@ -51,15 +51,21 @@ test("project navigation features all four featured apps with descriptions in ex
   assert.match(featured, />Featured<\/span>/);
   const bandBot = featured.indexOf('href="/bandbot/"');
   const tickerTags = featured.indexOf('href="/tickertags/"');
+  const gradientGrove = featured.indexOf('href="/gradientgrove/"');
+  const waveLens = featured.indexOf('href="/wavelens/"');
+  const orbitForge = featured.indexOf('href="/orbitforge/"');
   const musicBox = featured.indexOf('href="/musicbox/"');
   const stormSight = featured.indexOf('href="/radar/"');
-  assert.ok(musicBox >= 0 && musicBox < stormSight && stormSight < bandBot && bandBot < tickerTags);
+  assert.ok(musicBox >= 0 && musicBox < stormSight && stormSight < bandBot && bandBot < tickerTags && tickerTags < gradientGrove && gradientGrove < waveLens && waveLens < orbitForge);
   assert.match(featured, /href="\/musicbox\/"[^>]*><span class="site-projects__name">MusicBox<\/span><span class="site-projects__description">Paint the grid\. Play the groove\.<\/span>/);
   assert.match(featured, /href="\/radar\/"[^>]*><span class="site-projects__name">StormSight<\/span><span class="site-projects__description">Doppler Radar Map<\/span>/);
   assert.match(featured, /href="\/bandbot\/"[^>]*><span class="site-projects__name">BandBot<\/span><span class="site-projects__description">Music Composition Studio<\/span>/);
   assert.match(featured, /href="\/tickertags\/"[^>]*><span class="site-projects__name">TickerTags<\/span><span class="site-projects__description">Multi-ticker Stock Chart Viewer<\/span>/);
-  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 4);
-  assert.equal((featured.match(/site-projects__description/g) ?? []).length, 4);
+  assert.match(featured, /href="\/gradientgrove\/"[^>]*><span class="site-projects__name">Gradient Grove<\/span><span class="site-projects__description">Neural network playground<\/span>/);
+  assert.match(featured, /href="\/wavelens\/"[^>]*><span class="site-projects__name">WaveLens<\/span><span class="site-projects__description">Live sound visualizer<\/span>/);
+  assert.match(featured, /href="\/orbitforge\/"[^>]*><span class="site-projects__name">Orbit Forge<\/span><span class="site-projects__description">Orbital physics sandbox<\/span>/);
+  assert.equal((featured.match(/class="site-projects__link"/g) ?? []).length, 7);
+  assert.equal((featured.match(/site-projects__description/g) ?? []).length, 7);
   assert.doesNotMatch(html, /site-projects-tools|>Tools<\/span>/);
   assert.match(html.slice(graphicsStart, gamesStart), />Graphics<\/span>/);
   assert.match(games, />Games<\/span>/);
