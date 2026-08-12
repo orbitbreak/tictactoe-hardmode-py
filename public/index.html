@@ -8,20 +8,20 @@
       content="Play accessible Tic-Tac-Toe against easy, medium, or mathematically perfect hard-mode opponents, then inspect the move that decided the game."
     />
     <meta name="theme-color" content="#11172a" />
-    <meta property="og:title" content="Hard Mode Tic-Tac-Toe" />
+    <meta property="og:title" content="Tic-Tac-Toe Hardmode" />
     <meta
       property="og:description"
-      content="You cannot beat hard mode. Can you survive it?"
+      content="You can't beat perfection."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.jasonsher.com/tictactoe/" />
     <link rel="canonical" href="https://www.jasonsher.com/tictactoe/" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="site-nav.css?v=20260728-nav7" />
-    <link rel="stylesheet" href="styles.css?v=20260713-1" />
+    <link rel="stylesheet" href="styles.css?v=20260812-1" />
     <script defer src="js/site-nav.js?v=20260713-1"></script>
     <script type="module" src="js/app.js?v=20260713-1"></script>
-    <title>Hard Mode Tic-Tac-Toe</title>
+    <title>Tic-Tac-Toe Hardmode</title>
     <!-- Psst: the original minimalist Python/Tkinter ancestor survives byte-for-byte in legacy/original/. -->
   </head>
   <body>
@@ -46,12 +46,11 @@
               <span class="site-projects__section-title" id="site-projects-featured">Featured</span>
               <ul class="site-projects__group-list" aria-labelledby="site-projects-featured">
                 <li><a class="site-projects__link" href="/musicbox/"><span class="site-projects__name">MusicBox</span><span class="site-projects__description">Paint the grid. Play the groove.</span></a></li>
-                <li><a class="site-projects__link" href="/radar/"><span class="site-projects__name">StormSight</span><span class="site-projects__description">Doppler Radar Map</span></a></li>
                 <li><a class="site-projects__link" href="/bandbot/"><span class="site-projects__name">BandBot</span><span class="site-projects__description">Music Composition Studio</span></a></li>
-                <li><a class="site-projects__link" href="/tickertags/"><span class="site-projects__name">TickerTags</span><span class="site-projects__description">Multi-ticker Stock Chart Viewer</span></a></li>
-                <li><a class="site-projects__link" href="/gradientgrove/"><span class="site-projects__name">Gradient Grove</span><span class="site-projects__description">Neural network playground</span></a></li>
                 <li><a class="site-projects__link" href="/wavelens/"><span class="site-projects__name">WaveLens</span><span class="site-projects__description">Live sound visualizer</span></a></li>
-                <li><a class="site-projects__link" href="/orbitforge/"><span class="site-projects__name">Orbit Forge</span><span class="site-projects__description">Orbital physics sandbox</span></a></li>
+                <li><a class="site-projects__link" href="/radar/"><span class="site-projects__name">StormSight</span><span class="site-projects__description">Doppler Radar Map</span></a></li>
+                <li><a class="site-projects__link" href="/gradientgrove/"><span class="site-projects__name">Gradient Grove</span><span class="site-projects__description">Neural network playground</span></a></li>
+                <li><a class="site-projects__link" href="/tickertags/"><span class="site-projects__name">TickerTags</span><span class="site-projects__description">Multi-ticker Stock Chart Viewer</span></a></li>
               </ul>
             </li>
             <li class="site-projects__group">
@@ -67,23 +66,8 @@
               <ul class="site-projects__group-list" aria-labelledby="site-projects-games">
                 <li><a class="site-projects__link" href="/platformjumper"><span class="site-projects__name">Platform Jumper</span></a></li>
                 <li><a class="site-projects__link" href="/snakeautorandom"><span class="site-projects__name">Snake Autorandom</span></a></li>
-                <li><a class="site-projects__link" href="/tictactoe/" aria-current="page"><span class="site-projects__name">Hard Mode Tic-Tac-Toe</span></a></li>
+                <li><a class="site-projects__link" href="/tictactoe/" aria-current="page"><span class="site-projects__name">Tic-Tac-Toe Hardmode</span></a></li>
                 <li><a class="site-projects__link" href="/gameoflife/"><span class="site-projects__name">Conway’s Game of Life</span></a></li>
-              </ul>
-            </li>
-            <li class="site-projects__group">
-              <span class="site-projects__section-title" id="site-projects-learn">Learn</span>
-              <ul class="site-projects__group-list" aria-labelledby="site-projects-learn">
-                <li>
-                  <a class="site-projects__link" href="/LLM101/">
-                    <span class="site-projects__name">LLMs 101 Textbook</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="site-projects__link" href="/Blockchain101-EVM/">
-                    <span class="site-projects__name">Blockchain 101: EVM</span>
-                  </a>
-                </li>
               </ul>
             </li>
           </ul>
@@ -93,16 +77,8 @@
 
     <main class="page-shell" id="game">
       <header class="hero">
-        <p class="eyebrow">A tiny game without mercy</p>
-        <h1>Hard Mode <span>Tic-Tac-Toe</span></h1>
-        <p class="hero__lede">
-          You cannot beat perfect play. Hold it to a draw, then inspect exactly where every other future disappeared.
-        </p>
-        <div class="hero__facts" aria-label="Game features">
-          <span>Silent</span>
-          <span>Client-side</span>
-          <span>Keyboard friendly</span>
-        </div>
+        <h1>Tic-Tac-Toe <span>Hardmode</span></h1>
+        <p class="hero__lede">You can't beat perfection.</p>
       </header>
 
       <div class="game-layout">
@@ -241,10 +217,6 @@
           </article>
         </div>
       </section>
-
-      <footer class="footer">
-        <p>Pure HTML, CSS, and JavaScript. No framework, account, tracking, sound, or server game state.</p>
-      </footer>
     </main>
   </body>
 </html>

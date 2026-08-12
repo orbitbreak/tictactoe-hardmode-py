@@ -94,7 +94,6 @@ button {
   text-align: center;
 }
 
-.eyebrow,
 .section-kicker {
   margin: 0 0 0.35rem;
   color: var(--mint);
@@ -127,24 +126,6 @@ button {
   color: var(--muted);
   font-size: clamp(1rem, 2.5vw, 1.18rem);
   text-wrap: balance;
-}
-
-.hero__facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 1.25rem;
-}
-
-.hero__facts span {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.28rem 0.66rem;
-  background: rgb(255 255 255 / 4%);
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 700;
 }
 
 .game-layout {
@@ -639,13 +620,6 @@ button {
   font-size: 0.84rem;
 }
 
-.footer {
-  padding: 2.5rem 0 0;
-  color: var(--quiet);
-  font-size: 0.75rem;
-  text-align: center;
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -739,7 +713,6 @@ button {
   .cell[data-mark="X"] > span,
   .cell[data-mark="O"] > span,
   .record dd,
-  .eyebrow,
   .section-kicker {
     color: CanvasText;
   }
@@ -768,8 +741,7 @@ button {
   }
 
   .arena__actions,
-  .control-stack,
-  .footer {
+  .control-stack {
     display: none;
   }
 }

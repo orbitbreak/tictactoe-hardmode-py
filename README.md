@@ -1,4 +1,4 @@
-# Hard Mode Tic-Tac-Toe
+# Tic-Tac-Toe Hardmode
 
 A small, accessible browser game built around one challenge: perfect hard mode cannot be beaten, so holding it to a draw is the win.
 
@@ -10,7 +10,7 @@ The current edition is pure HTML, CSS, and JavaScript. It has no framework, runt
 - A memoized minimax solver. Hard mode varies among equally optimal moves but never deliberately weakens its play.
 - Explicit starter choice: X always moves first, so the human can play X or let the machine open as X.
 - A responsive nine-button board with arrow-key, Enter/Space, and number-key interaction.
-- Local-only win/draw/loss records stored separately for each difficulty.
+- Browser-saved win/draw/loss records stored separately for each difficulty.
 - A **No Mercy Report** that identifies the first human move that changed a drawable or winning position into a forced loss.
 - Every alternate move's perfect-play value, plus rewind and one-click timeline branching.
 - Reduced-motion and forced-colors treatments.
